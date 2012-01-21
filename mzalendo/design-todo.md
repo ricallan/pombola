@@ -19,6 +19,10 @@
 
     * scorecard of related constituency too if an MP (issue 173)
 
+### Position page
+
+    * needs full styling treatment, or to be dropped... http://127.0.0.1:8000/position/president/
+
 
 ## List pages
 
@@ -27,11 +31,13 @@
 
 ## Homepage
 
-    * hook up twitter
-    
+    * replace the lest-we-forget image and caption
+
     * hook up MP ratings
     
     * new logo (with the coloured shield)
+    
+    * urls in tweets should be clickable
     
 
 ## General
@@ -44,8 +50,14 @@
 
     * delete this file
     
+    * are the nav bar links correctly worded
+    
+    
+    
 
 ## Search
+
+    * search page needs styling
 
     * allow user to choose between various things to search
     
@@ -54,4 +66,8 @@
     * expose hansard search
 
     * generic search results have stub text in
+    
+    * partial words not matched - eg 'atta' does not match 'attache' (but attach does)
+
+    * position entries in search need icon
 
