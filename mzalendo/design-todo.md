@@ -15,19 +15,22 @@
     
 ### Place detail page
 
+    * Expose CDF data in a tab - from the 'projects' app.
+
 ### Person detail page
 
     * scorecard of related constituency too if an MP (issue 173)
 
 ### Position page
 
-    * needs full styling treatment, or to be dropped... http://127.0.0.1:8000/position/president/
+    * needs full styling treatment, or to be dropped... http://127.0.0.1:8000/position/president/ also needs image placeholder
 
 
 ## List pages
 
     * inspect for bits that need hooking up
 
+    * proper content http://127.0.0.1:8000/place/all/
 
 ## Homepage
 
@@ -52,18 +55,18 @@
     
     * are the nav bar links correctly worded
     
-    
+    * nav bar links should be drop down items to select from
     
 
 ## Search
 
-    * search page needs styling
+    * search page needs styling - /search
 
     * allow user to choose between various things to search
     
     * add faceted search box to the /person/all pages, and the others
     
-    * expose hansard search
+    * expose link to hansard search
 
     * generic search results have stub text in
     
