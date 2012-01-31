@@ -225,6 +225,10 @@ josh [at] supercooldesign.co.uk
           weight:normal;
         }
       }
+      li .sep {
+        padding-left: 0.5em;
+        padding-right: 0.5em;
+      }
       li a:hover {
         text-decoration:underline;
         color:$colour4;
@@ -283,7 +287,7 @@ josh [at] supercooldesign.co.uk
       border-bottom:2px solid $colour6;
       span {
         @include inline-block;
-        height:25px;
+        height:32px;
         padding:5px 0 0 130px;
         margin:-5px 0 0 24px;
         background:url(../images/d-smiley-sprite.png) 0 0 no-repeat;
@@ -303,19 +307,23 @@ josh [at] supercooldesign.co.uk
       display:block;
       li {
         article {
-          &:hover {
-            cursor:pointer;
-            background-color:$colour7;
-          }
-          &.active {
-            background-color:$colour7;
-            header{
-              background:url(../images/arrow-up.png) right 0 no-repeat;
+          &.has-details {
+            &:hover {
+              cursor:pointer;
+              background-color:$colour7;
+            }
+            &.active {
+              background-color:$colour7;
+              header{
+                background:url(../images/arrow-up.png) right 0 no-repeat;
+              }
+            }
+            header {
+              background:url(../images/arrow-down.png) right 0 no-repeat;            
             }
           }
           header {
             overflow:hidden;
-            background:url(../images/arrow-down.png) right 0 no-repeat;
             h4 {
               float:left;
               width:120px;
@@ -338,7 +346,7 @@ josh [at] supercooldesign.co.uk
             }
           }
           div.details {
-            float:left;
+            margin: 0px 0px 8px 200px; /* 200 from 120 (width of head) + 80 (padding+margin of text) */
             display:block;
             margin-top:10px;
             p {
@@ -525,6 +533,9 @@ ul.comments {
       width:60px;
       height:60px;
     }
+    section {
+      clear:none;
+    }
     .tools,
     .read-more-wrap {
       left:-999999px;
@@ -538,7 +549,16 @@ ul.comments {
     }
   }
 }
-
+.tab {
+  ul.comments,
+  ul.listing {
+    li {
+      section {
+        width:580px;
+      }
+    }
+  }
+}
 ul.listing {
   li {
     img {
@@ -576,9 +596,22 @@ ul.listing {
       color:$colour1;
       margin-top:15px;
       line-height:25px;
+      padding: 6px;
+      background:url(../images/arrow-down.png) right 0 no-repeat;
       font: {
         weight:normal;
         size:16px;
+      }
+      &:hover {
+        background-color: $colour15;
+        color: $colour1;
+        cursor: pointer;
+      } 
+      .details {
+        display: none;
+      }       
+      &.active {
+        background:$colour15 url(../images/arrow-up.png) right 0 no-repeat;
       }
     }
   }
@@ -641,8 +674,8 @@ ul#home-news-list {
   display:block;
   float:left;
   width:375px;
-  h3 {
-    color:$colour8;
+  h2 {
+    color: $colour8;
     font-size:18px;
     text-transform:uppercase;
   }
@@ -666,7 +699,8 @@ ul#home-news-list {
     margin-top:10px;
     float:right;
   }
-}
+} 
+
 #page .home-right .social-and-tools {
   margin-top:30px;
   width:90px;
@@ -691,6 +725,65 @@ ul#home-news-list {
     @include inline-block;
   }
 }
+
+.featured-person {
+  color:$colour6;
+  margin:0.666em 0 2em 0;
+  background-color:$colour1;
+  img {
+    float:left;
+    max-width: 200px;
+  }
+  .featured-person-info {
+    margin-left:200px;
+    padding:10px;
+    background-color:$colour1;
+    .feature-nav {
+      float:right; 
+      display:block;
+      width:20px;
+      height:20px;
+      background-image:url(/static/images/feature_chevrons.png);
+      background-repeat: no-repeat;          
+      &.feature-prev {
+        background-position: 0 0; 
+        &:hover {
+          background-position:0 -20px;
+        }
+      }
+      &.feature-next {
+        background-position: -20px 0;
+        &:hover {
+          background-position:-20px -20px;
+        }
+      }
+    }
+  }
+  .rating {
+    margin:0.5em 0 0 0;
+    font-size:1.2em; 
+    min-height:24px;
+    background-position: right 0;
+    background-repeat: no-repeat;
+    &.bad {
+      background-image:url(/static/images/score-bad.png);
+    }
+    &.average {
+      background-image:url(/static/images/score-average.png);
+    }
+    &.good {
+      background-image:url(/static/images/score-good.png);
+    }
+  }
+  &.featured-person-placeholder {
+    text-align: center;
+    height: 250px;
+    background: $colour1 url(/static/images/logo-450-x-150.png) center center no-repeat;
+  }
+}
+
+/* =================================== */
+
 
 /* Login Page */
 #login-pagetitle {

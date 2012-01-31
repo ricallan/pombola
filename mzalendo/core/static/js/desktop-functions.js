@@ -60,6 +60,11 @@ $(function(){
         }
     });
     
+    // hide/show home intro
+    $('#home-intro').live('click', function(){
+      hideShow($('span.details', $(this)), $(this));
+    });
+    
     
     /*
      * enable dialog based feedback links
@@ -157,7 +162,7 @@ $(function(){
   $('div.details').hide();
 
   // hide/show details
-  $('ul.scorecard article').live('click', function(){
+  $('ul.scorecard article.has-details').live('click', function(){
     hideShow($('div.details', $(this)), $(this));
   });
 

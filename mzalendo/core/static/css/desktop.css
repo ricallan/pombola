@@ -264,6 +264,10 @@ josh [at] supercooldesign.co.uk
   font-size: 12px;
   font-weight: normal;
 }
+#breadcrumb nav ul li .sep {
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+}
 #breadcrumb nav ul li a:hover {
   text-decoration: underline;
   color: #777777;
@@ -322,7 +326,7 @@ josh [at] supercooldesign.co.uk
   display: inline-block;
   vertical-align: middle;
   *vertical-align: auto;
-  height: 25px;
+  height: 32px;
   padding: 5px 0 0 130px;
   margin: -5px 0 0 24px;
   background: url(../images/d-smiley-sprite.png) 0 0 no-repeat;
@@ -351,19 +355,21 @@ josh [at] supercooldesign.co.uk
   margin: 0;
   border: 0;
 }
-#page .small-container ul.scorecard li article:hover {
+#page .small-container ul.scorecard li article.has-details:hover {
   cursor: pointer;
   background-color: #e6e6e6;
 }
-#page .small-container ul.scorecard li article.active {
+#page .small-container ul.scorecard li article.has-details.active {
   background-color: #e6e6e6;
 }
-#page .small-container ul.scorecard li article.active header {
+#page .small-container ul.scorecard li article.has-details.active header {
   background: url(../images/arrow-up.png) right 0 no-repeat;
+}
+#page .small-container ul.scorecard li article.has-details header {
+  background: url(../images/arrow-down.png) right 0 no-repeat;
 }
 #page .small-container ul.scorecard li article header {
   overflow: hidden;
-  background: url(../images/arrow-down.png) right 0 no-repeat;
 }
 #page .small-container ul.scorecard li article header h4 {
   float: left;
@@ -386,7 +392,8 @@ josh [at] supercooldesign.co.uk
   background: url(../images/score-bad.png) left 0 no-repeat;
 }
 #page .small-container ul.scorecard li article div.details {
-  float: left;
+  margin: 0px 0px 8px 200px;
+  /* 200 from 120 (width of head) + 80 (padding+margin of text) */
   display: block;
   margin-top: 10px;
 }
@@ -590,6 +597,9 @@ ul.comments li img {
   width: 60px;
   height: 60px;
 }
+ul.comments li section {
+  clear: none;
+}
 ul.comments li .tools,
 ul.comments li .read-more-wrap {
   left: -999999px;
@@ -597,6 +607,11 @@ ul.comments li .read-more-wrap {
 ul.comments li:hover .tools,
 ul.comments li:hover .read-more-wrap, ul.comments li.hovered .tools, ul.comments li.hovered .read-more-wrap {
   left: auto;
+}
+
+.tab ul.comments li section,
+.tab ul.listing li section {
+  width: 580px;
 }
 
 ul.listing li img {
@@ -658,8 +673,21 @@ ul.listing li section a.read-more:hover {
   color: #009245;
   margin-top: 15px;
   line-height: 25px;
+  padding: 6px;
+  background: url(../images/arrow-down.png) right 0 no-repeat;
   font-weight: normal;
   font-size: 16px;
+}
+#page .home-left h2#home-intro:hover {
+  background-color: #e5fff3;
+  color: #009245;
+  cursor: pointer;
+}
+#page .home-left h2#home-intro .details {
+  display: none;
+}
+#page .home-left h2#home-intro.active {
+  background: #e5fff3 url(../images/arrow-up.png) right 0 no-repeat;
 }
 #page .home-right {
   float: left;
@@ -723,7 +751,7 @@ ul#home-news-list li img {
   float: left;
   width: 375px;
 }
-#twitter h3 {
+#twitter h2 {
   color: gray;
   font-size: 18px;
   text-transform: uppercase;
@@ -779,6 +807,63 @@ ul#home-news-list li img {
   *display: inline;
 }
 
+.featured-person {
+  color: white;
+  margin: 0.666em 0 2em 0;
+  background-color: #009245;
+}
+.featured-person img {
+  float: left;
+  max-width: 200px;
+}
+.featured-person .featured-person-info {
+  margin-left: 200px;
+  padding: 10px;
+  background-color: #009245;
+}
+.featured-person .featured-person-info .feature-nav {
+  float: right;
+  display: block;
+  width: 20px;
+  height: 20px;
+  background-image: url(/static/images/feature_chevrons.png);
+  background-repeat: no-repeat;
+}
+.featured-person .featured-person-info .feature-nav.feature-prev {
+  background-position: 0 0;
+}
+.featured-person .featured-person-info .feature-nav.feature-prev:hover {
+  background-position: 0 -20px;
+}
+.featured-person .featured-person-info .feature-nav.feature-next {
+  background-position: -20px 0;
+}
+.featured-person .featured-person-info .feature-nav.feature-next:hover {
+  background-position: -20px -20px;
+}
+.featured-person .rating {
+  margin: 0.5em 0 0 0;
+  font-size: 1.2em;
+  min-height: 24px;
+  background-position: right 0;
+  background-repeat: no-repeat;
+}
+.featured-person .rating.bad {
+  background-image: url(/static/images/score-bad.png);
+}
+.featured-person .rating.average {
+  background-image: url(/static/images/score-average.png);
+}
+.featured-person .rating.good {
+  background-image: url(/static/images/score-good.png);
+}
+.featured-person.featured-person-placeholder {
+  text-align: center;
+  height: 250px;
+  background: #009245 url(/static/images/logo-450-x-150.png) center center no-repeat;
+}
+
+/* =================================== */
 /* Login Page */
 #login-pagetitle {
   display: block;
