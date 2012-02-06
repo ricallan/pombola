@@ -217,7 +217,6 @@ josh [at] supercooldesign.co.uk
         display:inline;
         padding:0;
         color:$colour8;
-        display:inline;
         background:none;
         text-decoration:none;
         font: {
@@ -327,6 +326,7 @@ josh [at] supercooldesign.co.uk
             h4 {
               float:left;
               width:120px;
+              line-height: 1em /* tightened up for line-wrapping */
             }
             p {
               float:left;
@@ -821,6 +821,19 @@ ul#home-news-list {
   }
 }
 
+/* ============ markdown used in e.g., info pages ============ */
+
+.markdown {
+  h2, h3 {
+    margin-top:2em;
+  }
+  h4 {
+    margin: 2em 0 0.333em 0;
+    padding-bottom: 0.2em;
+    border-bottom:2px solid $colour7;
+  }
+  
+}
 
 /* 5. MEDIA QUERIES
    for tablets mainly, but also smaller screens

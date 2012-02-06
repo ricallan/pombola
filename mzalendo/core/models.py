@@ -134,7 +134,7 @@ class PersonQuerySet(models.query.GeoQuerySet):
     def is_mp(self, when=None):
         # FIXME - Don't like the look of this, rather a big subquery.
         return self.filter(position__in=Position.objects.all().current_mp_positions(when))
-
+        
 class PersonManager(ManagerBase):
     def get_query_set(self):
         return PersonQuerySet(self.model)
@@ -160,6 +160,26 @@ class PersonManager(ManagerBase):
         else:
             return None
 
+    # featured MPs are returned in slug order: using this cos it's unique and easy to exclude current MP
+    def get_next_featured(self, current_slug, want_previous=False):
+        all_results = self.filter(can_be_featured=True).exclude(slug=current_slug)
+        if want_previous:
+            sort_order = '-slug'
+            results = all_results.order_by(sort_order).filter(slug__lt=current_slug)[:1]
+        else:
+            sort_order = 'slug'
+            results = all_results.order_by(sort_order).filter(slug__gt=current_slug)[:1]
+        if len(results) == 1:
+            return results[0]
+        else: # we're at the start/end of the list, wrap round to the other end
+            results = all_results.order_by(sort_order)[:1]
+            if len(results) == 1:
+                return results[0]
+            else:
+                return None
+
+
+
 class Person(ModelBase, HasImageMixin, ScorecardMixin):
     title = models.CharField(max_length=100, blank=True)
     legal_name = models.CharField(max_length=300)
@@ -178,6 +198,8 @@ class Person(ModelBase, HasImageMixin, ScorecardMixin):
     objects = PersonManager()
 
     comments = generic.GenericRelation(Comment)
+    
+    can_be_featured = models.BooleanField(default=False, help_text="can this person be featured on the home page (e.g., is their data appropriate and extant)?")
     
     def clean(self):
         # strip other_names and flatten multiple newlines
@@ -342,6 +364,17 @@ class PlaceKind(ModelBase):
        ordering = ["slug"]      
 
 
+class PlaceQuerySet(models.query.GeoQuerySet):
+    def constituencies(self):
+        return self.filter(kind__slug='constituency')
+
+    def counties(self):
+        return self.filter(kind__slug='county')
+
+class PlaceManager(ManagerBase):
+    def get_query_set(self):
+        return PlaceQuerySet(self.model)
+
 class Place(ModelBase, ScorecardMixin):
     name = models.CharField(max_length=200)
     slug = models.SlugField(max_length=100, unique=True, help_text="created from name")
@@ -354,8 +387,7 @@ class Place(ModelBase, ScorecardMixin):
     mapit_id = models.PositiveIntegerField(blank=True, null=True)
     parent_place = models.ForeignKey('self', blank=True, null=True, related_name='child_places')
 
-    objects = ManagerBase()
-
+    objects = PlaceManager()
     show_overall_score = False
 
     comments = generic.GenericRelation(Comment)
