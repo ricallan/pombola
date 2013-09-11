@@ -1,5 +1,7 @@
 # Debian packages that we need.
 
+build-essential
+
 libapache2-mod-wsgi
 
 # On non-debian systems you'll need to build these using the appropriate tools
@@ -9,14 +11,17 @@ libapache2-mod-wsgi
 # Database - we use postgres with the postgis addons
 postgresql
 postgis
+postgresql-9.1-postgis 
 libpq-dev
 
 # For mapit
-libgdal1-1.6.0 | libgdal1-1.5.0
+libgdal1-1.6.0 
+# or libgdal1-1.5.0
 python-gdal
 
-# Search (this is not in stock debian)
-elasticsearch
+# Search (this is not in stock debian), see INSTALL.txt for details
+openjdk-7-jre-headless
+# elasticsearch
 
 # Python - the language that the site is written in, and additional tools needed
 # to build the virtualenv - may already be included with your python install

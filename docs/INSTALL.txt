@@ -35,12 +35,33 @@ git clone https://github.com/mysociety/pombola.git
 # There are some dependencies that need to be installed. Please see the
 # 'conf/packages' file for details.
 
+On a Debian Ubuntu instance, the following command should work (tested on Ubuntu Precise)
+
+	grep -v '#' | sudo xargs apt-get install -y
+
+You will then need to install the latest Elasticsearch from
+	https://download.elasticsearch.org/elasticsearch/elasticsearch/
+
+For example on Debian/Ubuntu:
+
+	wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-0.90.0.deb
+	sudo dpkg -i elasticsearch-0.90.0.deb
+	sudo service elasticsearch start
+
 # DATABASES
 
 # A Postgis enabled Postgres database is required
 
 # create the database - assuming here that you're calling it 'pombola'
-createdb -T template_postgis pombola
+
+	createdb --owner pombola -T template_postgis pombola
+
+On Ubuntu Precise you may need to create this template first:
+
+	sudo su postgres
+	createdb template_postgis
+	psql -d template_postgis -f /usr/share/postgresql/9.1/contrib/postgis-1.5/postgis.sql
+	psql -d template_postgis -f /usr/share/postgresql/9.1/contrib/postgis-1.5/spatial_ref_sys.sq
 
 
 # CONFIGURATION FILES
@@ -58,7 +79,8 @@ nano conf/general.yml
 # Most of this is done using the 'bin/prepare_environment.bash' script. This
 # will create the virtual environment, install needed python dependencies and
 # then set up the database
-bin/prepare_environment.bash
+
+	bin/prepare_environment.bash
 
 If this step fails, please consult TROUBLESHOOTING.md
 
