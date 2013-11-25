@@ -23,10 +23,10 @@
   {% if previous or next %}
     <ul class="pager">
       {% if previous %}
-        <li class="previous"><a href="{% url "speeches:section-view" previous.id %}">&larr; {{ previous.title }}</a>
+        <li class="previous"><a href="{% url "speeches:section-view" previous.get_path %}">&larr; {{ previous.title }}</a>
       {% endif %}
       {% if next %}
-        <li class="next"><a href="{% url "speeches:section-view" next.id %}">{{ next.title }} &rarr;</a>
+        <li class="next"><a href="{% url "speeches:section-view" next.get_path %}">{{ next.title }} &rarr;</a>
       {% endif %}
     </ul>
   {% endif %}
@@ -38,7 +38,7 @@
         <li id="s{{ node.id }}" class="speech speech-border"{% if node.speaker.colour %} style="border-left-color: #{{ node.speaker.colour }};"{% endif %}>
         {% include "speeches/speech.html" with speech=node nosection="1" noli=1 %}
       {% else %}
-        <li><span class="section-title"><a href="{% url 'speeches:section-view' node.id %}">{{ node.title }}</a></span>
+        <li><span class="section-title"><a href="{% url 'speeches:section-view' node.get_path %}">{{ node.title }}</a></span>
         {% if node.is_leaf_node %}({{ node.speech_count }}){% endif %}
       {% endif %}
       {% for level in structure.closed_levels %}</li></ul>{% endfor %}
@@ -48,10 +48,10 @@
   {% if previous or next %}
     <ul class="pager">
       {% if previous %}
-        <li class="previous"><a href="{% url "speeches:section-view" previous.id %}">&larr; {{ previous.title }}</a>
+        <li class="previous"><a href="{% url "speeches:section-view" previous.get_path %}">&larr; {{ previous.title }}</a>
       {% endif %}
       {% if next %}
-        <li class="next"><a href="{% url "speeches:section-view" next.id %}">{{ next.title }} &rarr;</a>
+        <li class="next"><a href="{% url "speeches:section-view" next.get_path %}">{{ next.title }} &rarr;</a>
       {% endif %}
     </ul>
   {% endif %}

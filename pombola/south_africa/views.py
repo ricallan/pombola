@@ -22,7 +22,7 @@ from haystack.forms import SearchForm
 
 from popit.models import Person as PopitPerson
 from speeches.models import Section, Speech, Speaker, Tag
-from speeches.views import NamespaceMixin
+from speeches.views import NamespaceMixin, SectionView
 
 from pombola.core import models
 from pombola.core.views import PlaceDetailView, PlaceDetailSub, \
@@ -428,12 +428,11 @@ class SACommitteeSpeechRedirectView(RedirectView):
 
         raise Http404("No source URL for this content")
 
-class SACommitteeSectionRedirectView(RedirectView):
+class SACommitteeSectionRedirectView(RedirectView, SectionView):
 
     def get_redirect_url(self, **kwargs):
         try:
-            id = int( kwargs['pk'] )
-            section = Section.objects.get( id=id )
+            section = self.get_object()
             for speech in section.speech_set.all():
                 source_url = speech.source_url
                 if source_url:
